@@ -1,0 +1,8 @@
+.weather-card {
+}
+
+.weather-card__temp {
+  font-size: 36px;
+  line-height: 40px;
+  margin: 0;
+}
