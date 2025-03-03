@@ -1,4 +1,5 @@
 import sunny from "../../assets/sunny.png";
+import "./WeatherCard.css";
 function WeatherCard() {
   return (
     <section className="weather-card">
