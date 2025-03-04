@@ -1,0 +1,23 @@
+.cards__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  margin: 0;
+}
+
+.cards__list li {
+  list-style: none; /* Remove default list style */
+}
+
+.card {
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  width: 323px;
+  height: 326px;
+  position: relative;
+  gap: 20px;
+
+  display: flex; /* Enables flexbox */
+  flex-direction: column; /* Stacks children (image + title) */
+  align-items: center; /* Centers the title horizontally */
+}
