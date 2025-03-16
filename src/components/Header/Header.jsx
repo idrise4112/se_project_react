@@ -10,7 +10,7 @@ function Header({ handleAddClick }) {
   return (
     <header className="header">
       <img className="header__logo" src={logo} />
-      <p className="header__date-and-location">{currentDate}, LOCATION</p>
+      <p className="header__date-and-location">{currentDate}, FLUSHING</p>
       <button
         onClick={handleAddClick}
         type="button"
