@@ -3,22 +3,17 @@ import { defaultWeatherOptions, weatherOptions } from "../../utils/constants";
 
 function WeatherCard({ weatherData }) {
   const filteredOptions = weatherOptions.filter((option) => {
-    // return (
-    //   option.day === weatherData.isDay &&
-    //   option.condition === weatherData.condition
-    // );
-    return {
-      day: weatherData.isDay,
-      condition: weatherData.condition,
-    };
+    return (
+      option.day === weatherData.isDay &&
+      option.condition === weatherData.condition
+    );
   });
 
   let weatherOption;
-  if (filteredOptions.length === 0) {
+  if (filteredOptions.length > 0) {
     weatherOption = filteredOptions[0];
   } else {
-    weatherOption =
-      defaultWeatherOptions[weatherData.isNight ? "night" : "day"];
+    weatherOption = defaultWeatherOptions[weatherData.isDay ? "day" : "night"];
   }
 
   console.log(weatherOption);

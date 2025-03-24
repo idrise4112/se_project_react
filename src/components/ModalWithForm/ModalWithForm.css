@@ -14,6 +14,11 @@
 .modal__title {
   margin: 0;
   padding-bottom: 24px;
+  font-family: Cabinet Grotesk;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0%;
 }
 
 .modal__close {
@@ -47,6 +52,7 @@
   background: white;
   display: flex;
   flex-direction: column;
+  margin-left: -13px;
 }
 
 .modal__input {
