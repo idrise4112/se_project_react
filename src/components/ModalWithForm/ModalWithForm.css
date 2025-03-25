@@ -36,11 +36,6 @@
   outline: none;
 }
 
-.modal__image {
-  margin-left: -39px;
-  margin-top: -36px;
-}
-
 .modal__opened {
   visibility: visible;
 }
@@ -63,19 +58,15 @@
 }
 
 .modal__content {
-  background: white;
-  padding: 34px 36px;
+  font-family: "Cabinet Grotesk", sans-serif;
+  max-width: 496px;
+  width: 100%;
+  min-height: 436px;
+  background-color: #fff;
   border-radius: 20px;
   position: relative;
   box-sizing: border-box;
-  border: 1px solid;
-  font-family: "Cabinet Grotesk", sans-serif;
-  font-size: 16px;
-  line-height: 20px;
-  min-width: 450px;
-  width: 498px;
-  height: 610px;
-  border-radius: 16px;
+  padding: 28px 28px 36px;
 }
 
 .modal__form {

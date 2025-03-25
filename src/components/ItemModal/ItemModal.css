@@ -1,11 +1,23 @@
-.modal__content-image {
+.modal__content_type_image {
   padding: 0;
-}
-
-.modal__description {
-  padding: 20px;
+  overflow: hidden;
 }
 
 .modal__image {
-  padding: 0;
+  max-width: 100%;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+.modal__caption {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.modal__caption:last-of-type {
+  margin-bottom: 12px;
+}
+
+.modal__footer {
+  padding: 0 0 32px 32px;
 }
