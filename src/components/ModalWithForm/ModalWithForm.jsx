@@ -6,7 +6,7 @@ function ModalWithForm({ children, buttonText, title, activeModal, onClose }) {
         activeModal === "add-garment" ? "modal__opened" : ""
       }`}
     >
-      <div className="modal__content">
+      <div className="modal__content modal__content-image">
         <h2 className="modal__title">{title}</h2>
         <button
           onClick={onClose}

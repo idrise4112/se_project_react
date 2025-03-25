@@ -1,4 +1,5 @@
 .footer {
-  margin-top: 400px;
+  margin-top: 440px;
   justify-content: space-between;
+  display: flex;
 }

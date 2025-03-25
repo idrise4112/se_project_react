@@ -25,7 +25,15 @@
   position: absolute;
   top: 20px;
   right: 28px;
-  background-image: url("../assets/close.png");
+  background-image: url(../../assets/close.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+  border: none;
+  outline: none;
 }
 
 .modal__image {
@@ -35,6 +43,23 @@
 
 .modal__opened {
   visibility: visible;
+}
+
+.modal__content-image {
+  padding: 0;
+  background: white;
+  padding: 34px 36px;
+  border-radius: 20px;
+  position: relative;
+  box-sizing: border-box;
+  border: 1px solid;
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-size: 16px;
+  line-height: 20px;
+  min-width: 450px;
+  width: 502px;
+  height: 412px;
+  border-radius: 16px;
 }
 
 .modal__content {
@@ -48,8 +73,9 @@
   font-size: 16px;
   line-height: 20px;
   min-width: 450px;
-  width: 496px;
-  height: 436px;
+  width: 498px;
+  height: 610px;
+  border-radius: 16px;
 }
 
 .modal__form {
