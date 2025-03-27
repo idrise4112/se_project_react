@@ -25,9 +25,7 @@
   position: absolute;
   top: 20px;
   right: 28px;
-  background-image: url(../../assets/close.png);
-  background-repeat: no-repeat;
-  background-position: center;
+  background: url("../../assets/close.png") center no-repeat;
   background-size: contain;
   height: 20px;
   width: 20px;
@@ -36,7 +34,7 @@
   outline: none;
 }
 
-.modal__opened {
+.modal_opened {
   visibility: visible;
 }
 
