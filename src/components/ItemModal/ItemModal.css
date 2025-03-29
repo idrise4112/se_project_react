@@ -10,8 +10,11 @@
 }
 
 .modal__caption {
-  font-size: 20px;
+  font-family: Cabinet Grotesk;
   font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  margin-left: 32px;
 }
 
 .modal__caption:last-of-type {
@@ -20,4 +23,12 @@
 
 .modal__footer {
   padding: 0 0 32px 32px;
+}
+
+.modal__weather {
+  font-family: Cabinet Grotesk;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  margin-left: 32px;
 }
