@@ -1,6 +1,7 @@
 import "./Header.css";
 import logo from "../../assets/logo.svg";
 import avatar from "../../assets/avatar.png";
+import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 
 function Header({ handleAddClick, city }) {
   const currentDate = new Date().toLocaleString("default", {
@@ -15,6 +16,7 @@ function Header({ handleAddClick, city }) {
         {currentDate}, {city || "Loading..."}
       </p>
       <div className="header__actions">
+        <ToggleSwitch />
         <button
           className="header__button"
           onClick={handleAddClick}
