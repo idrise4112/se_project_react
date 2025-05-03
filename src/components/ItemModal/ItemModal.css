@@ -10,7 +10,7 @@
 }
 
 .modal__caption {
-  font-family: Cabinet Grotesk;
+  font-family: "Cabinet Grotesk", sans-serif;
   font-weight: 700;
   font-size: 20px;
   line-height: 24px;
@@ -26,7 +26,7 @@
 }
 
 .modal__weather {
-  font-family: Cabinet Grotesk;
+  font-family: "Cabinet Grotesk", sans-serif;
   font-weight: 700;
   font-size: 20px;
   line-height: 24px;
