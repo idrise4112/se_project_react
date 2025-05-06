@@ -4,7 +4,13 @@ import { useState } from "react";
 
 export default function AddItemModal({ isOpen, onClose }) {
   const [name, setName] = useState("");
-  console.log(name);
+  const [imageUrl, setImageUrl] = useState("");
+  const handleNameChange = (e) => {
+    setName(e.target.value);
+  };
+  const handleImageUrlChange = (e) => {
+    setImageUrl(e.target.value);
+  };
   return (
     <ModalWithForm
       title="New garment"
@@ -22,9 +28,8 @@ export default function AddItemModal({ isOpen, onClose }) {
           required
           minLength="1"
           maxLength="30"
-          onChange={(e) => {
-            setName(e.target.value);
-          }}
+          onChange={handleNameChange}
+          value={name}
         />
       </label>
       <label htmlFor="imageUrl" className="modal__label">
@@ -34,6 +39,8 @@ export default function AddItemModal({ isOpen, onClose }) {
           className="modal__input"
           id="imageUrl"
           placeholder="Image URL"
+          onChange={handleImageUrlChange}
+          value={imageUrl}
         />
       </label>
       <fieldset className="modal__radio-buttons">
