@@ -2,21 +2,41 @@ import "./AddItemModal.css";
 import ModalWithForm from "../../ModalWithForm/ModalWithForm";
 import { useState } from "react";
 
-export default function AddItemModal({ isOpen, onClose }) {
+export default function AddItemModal({
+  isOpen,
+  onClose,
+  onAddItemModalSubmit,
+}) {
   const [name, setName] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+  const [weather, setWeather] = useState("");
+
   const handleNameChange = (e) => {
     setName(e.target.value);
   };
   const handleImageUrlChange = (e) => {
     setImageUrl(e.target.value);
   };
+
+  const handleWeatherChange = (e) => {
+    setWeather(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onAddItemModalSubmit({ name, imageUrl, weather });
+    setName("");
+    setImageUrl("");
+    setWeather("");
+  };
+
   return (
     <ModalWithForm
       title="New garment"
       buttonText="Add garment"
       isOpen={isOpen}
       onClose={onClose}
+      onSubmit={handleSubmit}
     >
       <label htmlFor="name" className="modal__label">
         Name
@@ -51,6 +71,9 @@ export default function AddItemModal({ isOpen, onClose }) {
             type="radio"
             className="modal__radio-input"
             name="weather"
+            value="hot"
+            onChange={handleWeatherChange}
+            checked={weather === "hot"}
           />
           Hot
         </label>
@@ -60,6 +83,9 @@ export default function AddItemModal({ isOpen, onClose }) {
             type="radio"
             className="modal__radio-input"
             name="weather"
+            value="warm"
+            onChange={handleWeatherChange}
+            checked={weather === "warm"}
           />
           Warm
         </label>
@@ -69,6 +95,9 @@ export default function AddItemModal({ isOpen, onClose }) {
             type="radio"
             className="modal__radio-input"
             name="weather"
+            value="cold"
+            onChange={handleWeatherChange}
+            checked={weather === "cold"}
           />
           Cold
         </label>
