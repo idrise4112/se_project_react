@@ -1,3 +1,4 @@
+import avatar from "srcassetsavatar.png";
 function SideBar({ avatar }) {
   return (
     <div className="sidebar">
