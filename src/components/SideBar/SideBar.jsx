@@ -1,4 +1,4 @@
-function SideBar() {
+function SideBar({ avatar }) {
   return (
     <div className="sidebar">
       <img className="sidebar__avatar" src={avatar} alt="Default avatar" />

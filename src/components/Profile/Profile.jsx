@@ -1,4 +1,4 @@
-import SideBar from "../SideBar.jsx";
+import SideBar from "../SideBar/SideBar.jsx";
 function Profile() {
   return (
     <div className="profile">
