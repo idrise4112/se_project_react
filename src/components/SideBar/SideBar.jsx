@@ -1,5 +1,3 @@
-import "./Profile.jsx";
-
 function SideBar() {
   return (
     <div className="sidebar">
