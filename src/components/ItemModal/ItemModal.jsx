@@ -12,7 +12,7 @@ function ItemModal({ activeModal, onClose, card }) {
         ></button>
 
         <img
-          src={card.link}
+          src={card.imageUrl}
           alt={card.name || "Image preview"}
           className="modal__image"
         />

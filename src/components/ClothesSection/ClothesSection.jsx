@@ -1,7 +1,7 @@
 import ItemCard from "../ItemCard/ItemCard";
 import "./ClothesSection.css";
 
-import { defaultClothingItems } from "../../utils/constants";
+// import { defaultClothingItems } from "../../utils/constants";
 
 function ClothesSection({ weatherData, clothingItems, onCardClick }) {
   if (!weatherData) return <p>Loading...</p>;

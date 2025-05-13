@@ -20,7 +20,7 @@ function App() {
     temp: { F: 999, C: 999 },
     city: "",
   });
-  const [clothingItems, setClothingItems] = useState(defaultClothingItems);
+  const [clothingItems, setClothingItems] = useState([]);
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
 
@@ -59,7 +59,7 @@ function App() {
     getItems()
       .then((data) => {
         console.log(data); // Handle retrieved data
-        //set use\
+        setClothingItems(data);
       })
       .catch((error) => {
         console.error("Error fetching items:", error);
