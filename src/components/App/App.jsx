@@ -12,6 +12,7 @@ import currentTemperatureUnitContext from "../contexts/currentTemperatureUnitCon
 import AddItemModal from "./AddItemModal/AddItemModal";
 import { defaultClothingItems } from "../../utils/constants";
 import Profile from "../Profile/Profile";
+import { getItems } from "../../utils/api";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -54,6 +55,16 @@ function App() {
       })
       .catch(console.error);
   }, []);
+  useEffect(() => {
+    getItems()
+      .then((data) => {
+        console.log(data); // Handle retrieved data
+        //set use\
+      })
+      .catch((error) => {
+        console.error("Error fetching items:", error);
+      });
+  }, []);
 
   return (
     <currentTemperatureUnitContext.Provider
@@ -74,7 +85,16 @@ function App() {
                 />
               }
             />
-            <Route path="/profile" element={<Profile />} />
+            <Route
+              path="/profile"
+              element={
+                <Profile
+                  clothingItems={clothingItems}
+                  weatherData={weatherData}
+                  onCardClick={handleCardClick}
+                />
+              }
+            />
           </Routes>
 
           <Footer />

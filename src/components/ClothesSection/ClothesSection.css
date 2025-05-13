@@ -1,0 +1,12 @@
+.clothes-section {
+  gap: 900px;
+}
+
+.clothes-items__text {
+  display: flex;
+  gap: 10px;
+}
+
+.clothes-add {
+  border: none;
+}

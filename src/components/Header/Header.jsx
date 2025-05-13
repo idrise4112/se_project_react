@@ -1,4 +1,5 @@
 import "./Header.css";
+import { Link } from "react-router-dom";
 import logo from "../../assets/logo.svg";
 import avatar from "../../assets/avatar.png";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
@@ -11,7 +12,9 @@ function Header({ handleAddClick, city }) {
 
   return (
     <header className="header">
-      <img className="header__logo" src={logo} alt="WTWR Logo" />
+      <Link to="/">
+        <img className="header__logo" src={logo} alt="WTWR Logo" />
+      </Link>
       <p className="header__date-and-location">
         {currentDate}, {city || "Loading..."}
       </p>
@@ -24,10 +27,12 @@ function Header({ handleAddClick, city }) {
         >
           +Add Clothes
         </button>
-        <div className="header__avatar-container">
-          <img className="header__avatar" src={avatar} alt="User Avatar" />
-          <span className="header__username">Terrence Tegegne</span>
-        </div>
+        <Link to="/profile" className="header__link">
+          <div className="header__avatar-container">
+            <img className="header__avatar" src={avatar} alt="User Avatar" />
+            <span className="header__username">Terrence Tegegne</span>
+          </div>
+        </Link>
       </div>
     </header>
   );

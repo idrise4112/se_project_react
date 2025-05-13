@@ -1,0 +1,6 @@
+.sidebar {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  min-height: 40px;
+}
