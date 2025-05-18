@@ -37,6 +37,16 @@ function App() {
     setActiveModal("add-garment");
   };
 
+  {
+    activeModal === "delete-confirmation" && (
+      <DeleteConfirmationModal onClose={closeActiveModal} />
+    );
+  }
+
+  const handleDeleteClick = () => {
+    setActiveModal("delete-confirmation");
+  };
+
   const closeActiveModal = () => {
     setActiveModal("");
   };

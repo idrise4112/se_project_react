@@ -9,7 +9,7 @@ function DeleteConfirmationModal({ cardToDelete, onConfirmDelete, onClose }) {
           Cancel
         </button>
         <button
-          onClick={() => onConfirmDelete(cardToDelete)}
+          onClick={() => handleDeleteClick(cardToDelete)}
           className="modal__confirm"
         >
           Confirm Delete

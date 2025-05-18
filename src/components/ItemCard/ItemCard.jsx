@@ -1,6 +1,6 @@
 import "./ItemCard.css";
 
-function ItemCard({ item, onCardClick }) {
+function ItemCard({ item, onCardClick, onDelete }) {
   const handleCardClick = () => {
     onCardClick(item);
   };
@@ -14,6 +14,7 @@ function ItemCard({ item, onCardClick }) {
         src={item.imageUrl}
         alt={item.name}
       />
+      <button onClick={() => onDelete(item._id)}>Delete Item</button>
     </li>
   );
 }
