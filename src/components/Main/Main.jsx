@@ -20,9 +20,11 @@ function Main({
         </p>
         <ul className="cards__list">
           {clothingItems
+
             .filter((item) => {
               return item.weather === weatherData.type;
             })
+
             .map((item) => (
               <ItemCard
                 key={item._id}
