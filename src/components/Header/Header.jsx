@@ -20,6 +20,7 @@ function Header({ handleAddClick, city }) {
       </p>
       <div className="header__actions">
         <ToggleSwitch />
+
         <button
           className="header__button"
           onClick={handleAddClick}
@@ -30,7 +31,7 @@ function Header({ handleAddClick, city }) {
         <Link to="/profile" className="header__link">
           <div className="header__avatar-container">
             <img className="header__avatar" src={avatar} alt="User Avatar" />
-            <span className="header__username">Terrence Tegegne</span>
+            <span className="header__username">Idris Ellams</span>
           </div>
         </Link>
       </div>

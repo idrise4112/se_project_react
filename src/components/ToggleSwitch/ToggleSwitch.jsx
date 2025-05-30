@@ -6,6 +6,7 @@ export default function ToggleSwitch() {
   const { handleToggleSwitchChange, currentTemperatureUnit } = useContext(
     currentTemperatureUnitContext
   );
+
   return (
     <label className="toggle-switch">
       <input

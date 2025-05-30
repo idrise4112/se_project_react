@@ -1,6 +1,11 @@
 import "./ItemModal.css";
+import "../ModalWithForm/ModalWithForm.css";
 
-function ItemModal({ activeModal, onClose, card }) {
+const ItemModal = ({ activeModal, onClose, card, handlDeleteCLick }) => {
+  const handleClick = () => {
+    handlDeleteCLick(card);
+  };
+
   return (
     <div className={`modal ${activeModal === "preview" ? "modal_opened" : ""}`}>
       <div className="modal__content modal__content_type_image">
@@ -17,9 +22,10 @@ function ItemModal({ activeModal, onClose, card }) {
         />
         <p className="modal__caption">{card.name}</p>
         <p className="modal__weather">Weather: {card.weather}</p>
+        <button onClick={handleClick}>Delete Item</button>
       </div>
     </div>
   );
-}
+};
 
 export default ItemModal;

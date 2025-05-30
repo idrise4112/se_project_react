@@ -12,12 +12,12 @@
   position: absolute;
   top: 15px;
   margin: 0;
-  font-family: "" Cabinet Grotesk ", sans-serif;", sans-serif;
+  font-family: " Cabinet Grotesk ", sans-serif;
   font-size: 16px;
-  font-weight: 700px;
+  font-weight: 700;
   line-height: 20px;
   background-color: #fff;
-  padding: 2px, 12px;
+  padding: 2px 12px;
   border-radius: 4px;
   opacity: 60%;
 }
