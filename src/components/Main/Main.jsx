@@ -23,10 +23,10 @@ function Main({
       />
       <section className="cards">
         <p className="cards__text">
-          Today is
+          Today is{" "}
           {currentTemperatureUnit === "F"
             ? weatherData.temp.F
-            : weatherData.temp.C}{" "}
+            : weatherData.temp.C}
           &deg; {currentTemperatureUnit}/ You may want to wear :
         </p>
         <ul className="cards__list">

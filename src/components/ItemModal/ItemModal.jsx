@@ -1,9 +1,9 @@
 import "./ItemModal.css";
 import "../ModalWithForm/ModalWithForm.css";
 
-const ItemModal = ({ activeModal, onClose, card, handlDeleteCLick }) => {
+const ItemModal = ({ activeModal, onClose, card, handleDeleteClick }) => {
   const handleClick = () => {
-    handlDeleteCLick(card);
+    handleDeleteClick(card);
   };
 
   return (
@@ -21,8 +21,16 @@ const ItemModal = ({ activeModal, onClose, card, handlDeleteCLick }) => {
           className="modal__image"
         />
         <p className="modal__caption">{card.name}</p>
-        <p className="modal__weather">Weather: {card.weather}</p>
-        <button onClick={handleClick}>Delete Item</button>
+        <div className="modal__footer">
+          <p className="modal__weather">Weather: {card.weather}</p>
+          <button
+            onClick={handleClick}
+            type="button"
+            className="modal__delete-item"
+          >
+            Delete Item
+          </button>
+        </div>
       </div>
     </div>
   );

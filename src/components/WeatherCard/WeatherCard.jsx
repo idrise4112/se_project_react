@@ -21,7 +21,7 @@ function WeatherCard({ weatherData, currentTemperatureUnit }) {
       <p className="weather-card__temp">
         {currentTemperatureUnit === "F"
           ? weatherData.temp.F
-          : weatherData.temp.C}{" "}
+          : weatherData.temp.C}
         &deg; {currentTemperatureUnit}
       </p>
       <img

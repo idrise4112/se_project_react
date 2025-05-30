@@ -12,14 +12,11 @@ function DeleteConfirmationModal({
         activeModal === "confirm-modal" ? "modal_opened" : ""
       }`}
     >
-      <div className="modal__content">
-        <img
-          src={cardToDelete?.imageUrl}
-          alt="Item to be deleted"
-          className="modal__image"
-        />
-
-        <p>Are you sure you want to delete {cardToDelete?.name}?</p>
+      <div className="modal__content-confirm">
+        <p className="modal__confirm-text">
+          Are you sure you want to delete {cardToDelete?.name}? This action is
+          irreversible.
+        </p>
 
         <button onClick={onClose} className="modal__cancel">
           Cancel
@@ -29,7 +26,7 @@ function DeleteConfirmationModal({
           className="modal__confirm"
           onClick={() => onConfirmDelete(cardToDelete._id)}
         >
-          Confirm Delete
+          Yes, delete item
         </button>
       </div>
     </div>

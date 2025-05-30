@@ -22,7 +22,6 @@ function App() {
   const [clothingItems, setClothingItems] = useState([]);
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
-  const [showModal, setShowModal] = useState(false);
   const [cardToDelete, setCardToDelete] = useState(null);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
 
@@ -40,6 +39,11 @@ function App() {
       .catch((error) => console.error("Error fetching items:", error));
   }, []);
 
+  const handleAddItem = ({ name, imageUrl, weather }) => {
+    // update clothingItems array
+    setClothingItems([{ name, link: imageUrl, weather }, ...clothingItems]);
+  };
+
   const handleCardClick = (card) => {
     setActiveModal("preview");
     setSelectedCard(card);
@@ -54,7 +58,7 @@ function App() {
     setClothingItems((prevItems) => {
       return prevItems.filter((item) => item._id !== id);
     });
-    // setActiveModal("confirm-modal");
+    setActiveModal("");
   };
 
   const closeActiveModal = () => {
@@ -102,6 +106,7 @@ function App() {
           <Footer />
           {activeModal === "add-garment" && (
             <AddItemModal
+              onAddItemModalSubmit={handleAddItem}
               onClose={closeActiveModal}
               isOpen={activeModal === "add-garment"}
             />
@@ -112,12 +117,14 @@ function App() {
             onConfirmDelete={handleConfirmDelete}
             onClose={closeActiveModal}
           />
-          <ItemModal
-            activeModal={activeModal}
-            card={selectedCard}
-            onClose={closeActiveModal}
-            handleDeleteClick={handleDeleteClick}
-          />
+          {activeModal === "preview" && (
+            <ItemModal
+              activeModal={activeModal}
+              card={selectedCard}
+              onClose={closeActiveModal}
+              handleDeleteClick={handleDeleteClick}
+            />
+          )}
         </div>
       </div>
     </currentTemperatureUnitContext.Provider>
