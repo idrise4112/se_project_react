@@ -11,7 +11,7 @@ import Profile from "../Profile/Profile";
 import { filterWeatherData, getWeather } from "../../utils/weatherApi";
 import currentTemperatureUnitContext from "../../contexts/currentTemperatureUnitContext";
 import AddItemModal from "../AddItemModal/AddItemModal";
-import { getItems } from "../../utils/api";
+import { getItems, addItem, deleteItem } from "../../utils/api";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -39,9 +39,11 @@ function App() {
       .catch((error) => console.error("Error fetching items:", error));
   }, []);
 
-  const handleAddItem = ({ name, imageUrl, weather }) => {
-    // update clothingItems array
-    setClothingItems([{ name, link: imageUrl, weather }, ...clothingItems]);
+  const handleAddItem = async ({ name, imageUrl, weather }) => {
+    const newItem = { name, imageUrl, weather };
+    const added = await addItem(newItem); // Assuming addItem makes an API request and returns the new item
+    setClothingItems((prev) => [...prev, added]); // Keeping clothingItems in sync
+    setActiveModal("");
   };
 
   const handleCardClick = (card) => {
@@ -54,11 +56,12 @@ function App() {
     setActiveModal("confirm-modal");
   };
 
-  const handleConfirmDelete = (id) => {
-    setClothingItems((prevItems) => {
-      return prevItems.filter((item) => item._id !== id);
-    });
-    setActiveModal("");
+  const handleConfirmDelete = async (id) => {
+    await deleteItem(id); // Ensure delete request happens first
+    setClothingItems((prevItems) =>
+      prevItems.filter((item) => item._id !== id)
+    );
+    setActiveModal(""); // Close the modal after deletion
   };
 
   const closeActiveModal = () => {
