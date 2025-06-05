@@ -43,14 +43,14 @@ function App() {
     const fetchItems = async () => {
       try {
         const data = await getItems();
-        setClothingItems(data);
+        setClothingItems(data.reverse());
       } catch (error) {
         console.error("Error fetching items:", error);
       }
     };
+
     fetchItems();
   }, []);
-
   const handleAddClick = () => {
     setActiveModal("add-garment");
   };
@@ -63,7 +63,7 @@ function App() {
     try {
       const newItem = { name, imageUrl, weather };
       const added = await addItem(newItem);
-      setClothingItems((prev) => [...prev, added]);
+      setClothingItems((prev) => [added, ...prev]);
       closeActiveModal();
     } catch (error) {
       console.error("Error adding item:", error);
