@@ -9,7 +9,7 @@ import ItemModal from "../ItemModal/ItemModal";
 import DeleteConfirmationModal from "../DeleteConfirmationModal/DeleteConfirmationModal";
 import Profile from "../Profile/Profile";
 import { filterWeatherData, getWeather } from "../../utils/weatherApi";
-import currentTemperatureUnitContext from "../../contexts/currentTemperatureUnitContext";
+import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext.js";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import { getItems, addItem, deleteItem } from "../../utils/api";
 
@@ -25,25 +25,49 @@ function App() {
   const [cardToDelete, setCardToDelete] = useState(null);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
 
+  // Fetch weather data with error handling
   useEffect(() => {
-    getWeather(coordinates, APIkey)
-      .then((data) => setWeatherData(filterWeatherData(data)))
-      .catch(console.error);
+    const fetchWeatherData = async () => {
+      try {
+        const data = await getWeather(coordinates, APIkey);
+        setWeatherData(filterWeatherData(data));
+      } catch (error) {
+        console.error("Error fetching weather data:", error);
+      }
+    };
+    fetchWeatherData();
   }, []);
+
+  // Fetch clothing items with error handling
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        const data = await getItems();
+        setClothingItems(data);
+      } catch (error) {
+        console.error("Error fetching items:", error);
+      }
+    };
+    fetchItems();
+  }, []);
+
   const handleAddClick = () => {
     setActiveModal("add-garment");
   };
-  useEffect(() => {
-    getItems()
-      .then((data) => setClothingItems(data))
-      .catch((error) => console.error("Error fetching items:", error));
-  }, []);
+
+  // const handleAddClick = () => {
+  //   setActiveModal("add-garment");
+  // };
 
   const handleAddItem = async ({ name, imageUrl, weather }) => {
-    const newItem = { name, imageUrl, weather };
-    const added = await addItem(newItem); // Assuming addItem makes an API request and returns the new item
-    setClothingItems((prev) => [...prev, added]); // Keeping clothingItems in sync
-    setActiveModal("");
+    try {
+      const newItem = { name, imageUrl, weather };
+      const added = await addItem(newItem);
+      setClothingItems((prev) => [...prev, added]);
+      closeActiveModal();
+    } catch (error) {
+      console.error("Error adding item:", error);
+    }
   };
 
   const handleCardClick = (card) => {
@@ -57,25 +81,37 @@ function App() {
   };
 
   const handleConfirmDelete = async (id) => {
-    await deleteItem(id); // Ensure delete request happens first
-    setClothingItems((prevItems) =>
-      prevItems.filter((item) => item._id !== id)
-    );
-    setActiveModal(""); // Close the modal after deletion
+    try {
+      await deleteItem(id);
+      setClothingItems((prevItems) =>
+        prevItems.filter((item) => item._id !== id)
+      );
+      closeActiveModal();
+    } catch (error) {
+      console.error("Error deleting item:", error);
+    }
   };
 
   const closeActiveModal = () => {
-    setActiveModal("");
+    try {
+      setActiveModal("");
+    } catch (error) {
+      console.error("Error closing modal:", error);
+    }
   };
 
   return (
-    <currentTemperatureUnitContext.Provider
+    <CurrentTemperatureUnitContext.Provider
       value={{
         currentTemperatureUnit,
         handleToggleSwitchChange: () => {
-          currentTemperatureUnit === "F"
-            ? setCurrentTemperatureUnit("C")
-            : setCurrentTemperatureUnit("F");
+          try {
+            setCurrentTemperatureUnit((prevUnit) =>
+              prevUnit === "F" ? "C" : "F"
+            );
+          } catch (error) {
+            console.error("Error toggling temperature unit:", error);
+          }
         },
       }}
     >
@@ -130,7 +166,7 @@ function App() {
           )}
         </div>
       </div>
-    </currentTemperatureUnitContext.Provider>
+    </CurrentTemperatureUnitContext.Provider>
   );
 }
 
