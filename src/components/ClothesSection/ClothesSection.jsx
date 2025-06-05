@@ -11,6 +11,10 @@ function ClothesSection({
   handleAddClick,
 }) {
   if (!weatherData) return <p>Loading...</p>;
+
+  console.log(13131313);
+  console.log(clothingItems);
+
   return (
     <div className="clothes__section">
       <div className="clothes__items-text">
@@ -25,7 +29,10 @@ function ClothesSection({
       </div>
       <ul className="cards__list">
         {clothingItems
-          .filter((item) => item.weather === weatherData.type)
+          .filter((item) => {
+            console.log(item.weather, weatherData.type);
+            return item.weather === weatherData.type;
+          })
           .map((item) => (
             <ItemCard key={item._id} item={item} onCardClick={onCardClick} />
           ))}
