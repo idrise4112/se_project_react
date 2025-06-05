@@ -27,3 +27,12 @@ export const deleteItem = async (id) => {
   });
   if (!response.ok) throw new Error("Failed to delete item");
 };
+
+// api.js
+export const checkResponse = (res) => {
+  if (res.ok) {
+    return res.json();
+  } else {
+    return Promise.reject(`Error: ${res.status}`);
+  }
+};
