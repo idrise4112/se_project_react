@@ -32,9 +32,9 @@ function Main({
         <ul className="cards__list">
           {clothingItems
 
-            // .filter((item) => {
-            //   return item.weather === weatherData.type;
-            // })
+            .filter((item) => {
+              return item.weather === weatherData.type;
+            })
 
             .map((item) => (
               <ItemCard
