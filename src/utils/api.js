@@ -15,14 +15,21 @@ export function getItems() {
 }
 
 // 2. Add a new item
-export const addItem = (newItem) => {
-  return fetch(baseUrl, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(newItem),
-  }).then(checkResponse);
+export const addItem = async (newItem, token) => {
+  try {
+    const response = await fetch(baseUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`, // 👈 This is where the token goes
+      },
+      body: JSON.stringify(newItem),
+    });
+    return await checkResponse(response);
+  } catch (error) {
+    console.error("Failed to add item:", error);
+    throw error;
+  }
 };
 
 // 3. Delete an item

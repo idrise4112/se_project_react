@@ -1,14 +1,7 @@
-import React, { useContext, useState, useEffect } from "react";
-import "./Profile.css";
+// components/EditProfileModal.jsx
+import React, { useState, useEffect } from "react";
+import "./EditProfileModal.css";
 
-// Dummy components for layout
-import ClothesSection from "../ClothesSection/ClothesSection.jsx";
-import SideBar from "../SideBar/SideBar.jsx";
-
-// Context
-import CurrentUserContext from "../../contexts/CurrentUserContext";
-
-// Modal Component
 const EditProfileModal = ({ isOpen, onClose, currentUser, onUpdate }) => {
   const [name, setName] = useState("");
   const [avatar, setAvatar] = useState("");
@@ -102,54 +95,4 @@ const EditProfileModal = ({ isOpen, onClose, currentUser, onUpdate }) => {
   );
 };
 
-// Main Profile Component
-function Profile({ clothingItems, weatherData, onCardClick, handleAddClick }) {
-  const currentUser = useContext(CurrentUserContext);
-  const [isEditModalOpen, setEditModalOpen] = useState(false);
-  const [updatedUser, setUpdatedUser] = useState(currentUser);
-
-  useEffect(() => {
-    setUpdatedUser(currentUser);
-  }, [currentUser]);
-
-  const userItems = clothingItems.filter(
-    (item) => item.owner === updatedUser?._id
-  );
-
-  const handleProfileUpdate = (newUserData) => {
-    setUpdatedUser(newUserData);
-  };
-
-  return (
-    <div className="profile">
-      <section className="profile__sidebar">
-        <SideBar />
-        <button
-          onClick={() => setEditModalOpen(true)}
-          className="profile__edit-button"
-          disabled={isEditModalOpen}
-        >
-          Edit Profile
-        </button>
-      </section>
-
-      <section className="profile__clothing-items">
-        <ClothesSection
-          onCardClick={onCardClick}
-          weatherData={weatherData}
-          clothingItems={userItems}
-          handleAddClick={handleAddClick}
-        />
-      </section>
-
-      <EditProfileModal
-        isOpen={isEditModalOpen}
-        onClose={() => setEditModalOpen(false)}
-        currentUser={updatedUser}
-        onUpdate={handleProfileUpdate}
-      />
-    </div>
-  );
-}
-
-export default Profile;
+export default EditProfileModal;

@@ -1,7 +1,12 @@
 import "./ItemModal.css";
 import "../ModalWithForm/ModalWithForm.css";
+import { useContext } from "react";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 const ItemModal = ({ activeModal, onClose, card, handleDeleteClick }) => {
+  const currentUser = useContext(CurrentUserContext);
+  const isOwn = card.owner === currentUser?._id;
+
   const handleClick = () => {
     handleDeleteClick(card);
   };
@@ -23,13 +28,15 @@ const ItemModal = ({ activeModal, onClose, card, handleDeleteClick }) => {
         <p className="modal__caption">{card.name}</p>
         <div className="modal__footer">
           <p className="modal__weather">Weather: {card.weather}</p>
-          <button
-            onClick={handleClick}
-            type="button"
-            className="modal__delete-item"
-          >
-            Delete Item
-          </button>
+          {isOwn && (
+            <button
+              onClick={handleClick}
+              type="button"
+              className="modal__delete-item"
+            >
+              Delete Item
+            </button>
+          )}
         </div>
       </div>
     </div>

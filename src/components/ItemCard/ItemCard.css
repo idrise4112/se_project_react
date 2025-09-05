@@ -22,6 +22,17 @@
   opacity: 60%;
 }
 
-.card__image {
-  width: 100%;
+.card__like-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
+  margin-top: 8px;
+}
+
+.card__like-button_active {
+  opacity: 1;
+  color: red;
 }

@@ -24,7 +24,7 @@ export default function RegisterModal({ isOpen, onClose, onRegister }) {
   return (
     <ModalWithForm
       title="Sign Up"
-      buttonText="Register"
+      buttonText="Next"
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
