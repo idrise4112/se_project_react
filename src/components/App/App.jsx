@@ -15,7 +15,13 @@ import AddItemModal from "../AddItemModal/AddItemModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
-import { getItems, addItem, deleteItem } from "../../utils/api";
+import {
+  getItems,
+  addItem,
+  deleteItem,
+  addCardLike,
+  removeCardLike,
+} from "../../utils/api";
 import { signup, signin, checkToken } from "../../utils/auth";
 
 function App() {
@@ -80,7 +86,6 @@ function App() {
 
   const handleRegister = async (data) => {
     try {
-      console.log(data);
       await signup(data);
       await handleLogin({ email: data.email, password: data.password });
       closeActiveModal();
@@ -100,6 +105,13 @@ function App() {
     } catch (error) {
       console.error("Login failed:", error);
     }
+  };
+
+  const handleSignOut = () => {
+    localStorage.removeItem("jwt");
+    setIsLoggedIn(false);
+    setCurrentUser(null);
+    setActiveModal("");
   };
 
   const handleAddItem = async ({ name, imageUrl, weather }) => {
@@ -137,6 +149,21 @@ function App() {
     }
   };
 
+  const handleCardLike = ({ _id, likes }) => {
+    const token = localStorage.getItem("jwt");
+    const isLiked = likes.some((id) => id === currentUser?._id);
+
+    const request = isLiked ? removeCardLike : addCardLike;
+
+    request(_id, token)
+      .then((updatedCard) => {
+        setClothingItems((prevItems) =>
+          prevItems.map((item) => (item._id === _id ? updatedCard : item))
+        );
+      })
+      .catch((err) => console.error("Like toggle error:", err));
+  };
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <CurrentTemperatureUnitContext.Provider
@@ -158,6 +185,7 @@ function App() {
               onRegisterClick={handleRegisterClick}
               isLoggedIn={isLoggedIn}
               currentUser={currentUser}
+              onSignOut={handleSignOut}
             />
 
             <Routes>
@@ -169,6 +197,7 @@ function App() {
                     handleCardClick={handleCardClick}
                     clothingItems={clothingItems}
                     handleDeleteClick={handleDeleteClick}
+                    onCardLike={handleCardLike}
                   />
                 }
               />
@@ -181,6 +210,8 @@ function App() {
                       weatherData={weatherData}
                       onCardClick={handleCardClick}
                       handleAddClick={handleAddClick}
+                      onCardLike={handleCardLike}
+                      onSignOut={handleSignOut}
                     />
                   </ProtectedRoute>
                 }

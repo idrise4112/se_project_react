@@ -11,6 +11,7 @@ function Header({
   onLoginClick,
   onRegisterClick,
   isLoggedIn,
+  onSignOut, // ✅ Add this prop
 }) {
   const currentUser = useContext(CurrentUserContext);
   const currentDate = new Date().toLocaleString("default", {
@@ -52,16 +53,29 @@ function Header({
         </button>
 
         {isLoggedIn ? (
-          <Link to="/profile" className="header__link">
-            <div className="header__avatar-container">
-              {renderAvatar()}
-              <span className="header__username">{currentUser?.name}</span>
-            </div>
-          </Link>
+          <div className="header__user-controls">
+            <Link to="/profile" className="header__link">
+              <div className="header__avatar-container">
+                {renderAvatar()}
+                <span className="header__username">{currentUser?.name}</span>
+              </div>
+            </Link>
+            <button
+              className="header__signout-button"
+              onClick={onSignOut}
+              aria-label="Sign Out"
+            >
+              Sign Out
+            </button>
+          </div>
         ) : (
           <div className="header__auth-buttons">
-            <button onClick={onRegisterClick}>Sign Up</button>
-            <button onClick={onLoginClick}>Log In</button>
+            <button className="header__sign-up" onClick={onRegisterClick}>
+              Sign Up
+            </button>
+            <button className="header__login" onClick={onLoginClick}>
+              Log In
+            </button>
           </div>
         )}
       </div>

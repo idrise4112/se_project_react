@@ -1,4 +1,4 @@
-.card {
+.card__image {
   width: 323px;
   position: relative;
   display: flex;
@@ -23,13 +23,11 @@
 }
 
 .card__like-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 18px;
-  opacity: 0.5;
-  transition: opacity 0.2s ease;
-  margin-top: 8px;
+  background-image: url("../../assets/heart.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 24px;
+  height: 24px;
 }
 
 .card__like-button_active {

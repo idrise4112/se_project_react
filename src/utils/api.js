@@ -21,7 +21,7 @@ export const addItem = async (newItem, token) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`, // 👈 This is where the token goes
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(newItem),
     });
@@ -33,8 +33,34 @@ export const addItem = async (newItem, token) => {
 };
 
 // 3. Delete an item
-export const deleteItem = (id) => {
+export const deleteItem = (id, token) => {
   return fetch(`${baseUrl}/${id}`, {
     method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  }).then(checkResponse);
+};
+
+// 4. Like an item
+export const addCardLike = (id, token) => {
+  return fetch(`${baseUrl}/${id}/likes`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  }).then(checkResponse);
+};
+
+// 5. Dislike (remove like) from an item
+export const removeCardLike = (id, token) => {
+  return fetch(`${baseUrl}/${id}/likes`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
   }).then(checkResponse);
 };
