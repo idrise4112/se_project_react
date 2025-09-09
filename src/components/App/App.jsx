@@ -156,9 +156,14 @@ function App() {
     const request = isLiked ? removeCardLike : addCardLike;
 
     request(_id, token)
-      .then((updatedCard) => {
+      .then((response) => {
+        console.log(response);
+
+        const updatedCard = response.data;
         setClothingItems((prevItems) =>
-          prevItems.map((item) => (item._id === _id ? updatedCard : item))
+          prevItems.map((item) =>
+            item._id === updatedCard._id ? updatedCard : item
+          )
         );
       })
       .catch((err) => console.error("Like toggle error:", err));

@@ -9,6 +9,7 @@ function ClothesSection({
   clothingItems,
   onCardClick,
   handleAddClick,
+  onCardLike,
 }) {
   if (!weatherData) return <p>Loading...</p>;
 
@@ -26,7 +27,12 @@ function ClothesSection({
       </div>
       <ul className="cards__list">
         {clothingItems.map((item) => (
-          <ItemCard key={item._id} item={item} onCardClick={onCardClick} />
+          <ItemCard
+            key={item._id}
+            item={item}
+            onCardClick={onCardClick}
+            onCardLike={onCardLike}
+          />
         ))}
       </ul>
     </div>

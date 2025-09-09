@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import "./Profile.css";
 
-// Dummy components for layout
 import ClothesSection from "../ClothesSection/ClothesSection.jsx";
 import SideBar from "../SideBar/SideBar.jsx";
 
@@ -103,7 +102,13 @@ const EditProfileModal = ({ isOpen, onClose, currentUser, onUpdate }) => {
 };
 
 // Main Profile Component
-function Profile({ clothingItems, weatherData, onCardClick, handleAddClick }) {
+function Profile({
+  clothingItems,
+  weatherData,
+  onCardClick,
+  handleAddClick,
+  onCardLike,
+}) {
   const currentUser = useContext(CurrentUserContext);
   const [isEditModalOpen, setEditModalOpen] = useState(false);
   const [updatedUser, setUpdatedUser] = useState(currentUser);
@@ -139,6 +144,7 @@ function Profile({ clothingItems, weatherData, onCardClick, handleAddClick }) {
           weatherData={weatherData}
           clothingItems={userItems}
           handleAddClick={handleAddClick}
+          onCardLike={onCardLike}
         />
       </section>
 

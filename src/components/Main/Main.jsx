@@ -1,5 +1,4 @@
 import { useContext } from "react";
-
 import WeatherCard from "../WeatherCard/WeatherCard";
 import ItemCard from "../ItemCard/ItemCard";
 import CurrentTemperatureUnitContext from "../../contexts/currentTemperatureUnitContext";
@@ -12,6 +11,7 @@ function Main({
   handleCardClick,
   clothingItems,
   handleDeleteClick,
+  onCardLike, // ✅ Correct prop name
 }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
 
@@ -27,21 +27,18 @@ function Main({
           {currentTemperatureUnit === "F"
             ? weatherData.temp.F
             : weatherData.temp.C}
-          &deg; {currentTemperatureUnit}/ You may want to wear :
+          &deg; {currentTemperatureUnit}/ You may want to wear:
         </p>
         <ul className="cards__list">
           {clothingItems
-
-            .filter((item) => {
-              return item.weather === weatherData.type;
-            })
-
+            .filter((item) => item.weather === weatherData.type)
             .map((item) => (
               <ItemCard
                 key={item._id}
                 item={item}
                 onCardClick={handleCardClick}
                 handleDeleteClick={handleDeleteClick}
+                onCardLike={onCardLike} // ✅ Fixed here
               />
             ))}
         </ul>
