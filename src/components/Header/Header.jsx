@@ -11,7 +11,7 @@ function Header({
   onLoginClick,
   onRegisterClick,
   isLoggedIn,
-  onSignOut, // ✅ Add this prop
+  onSignOut,
 }) {
   const currentUser = useContext(CurrentUserContext);
   const currentDate = new Date().toLocaleString("default", {
@@ -43,15 +43,15 @@ function Header({
       </p>
       <div className="header__actions">
         <ToggleSwitch />
-
-        <button
-          className="header__button"
-          onClick={handleAddClick}
-          aria-label="Add New Garment"
-        >
-          +Add Clothes
-        </button>
-
+        {isLoggedIn && (
+          <button
+            className="header__button"
+            onClick={handleAddClick}
+            aria-label="Add New Garment"
+          >
+            +Add Clothes
+          </button>
+        )}
         {isLoggedIn ? (
           <div className="header__user-controls">
             <Link to="/profile" className="header__link">

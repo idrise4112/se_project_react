@@ -64,3 +64,18 @@ export const removeCardLike = (id, token) => {
     },
   }).then(checkResponse);
 };
+
+// 6. Update user profile
+export const updateUserProfile = async ({ name, avatar }) => {
+  const token = localStorage.getItem("jwt");
+  const response = await fetch("http://localhost:3001/users/me", {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ name, avatar }),
+  });
+
+  return checkResponse(response);
+};

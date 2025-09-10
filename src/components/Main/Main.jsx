@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import WeatherCard from "../WeatherCard/WeatherCard";
 import ItemCard from "../ItemCard/ItemCard";
-import CurrentTemperatureUnitContext from "../../contexts/currentTemperatureUnitContext";
+import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 
 import "./Main.css";
@@ -11,7 +11,7 @@ function Main({
   handleCardClick,
   clothingItems,
   handleDeleteClick,
-  onCardLike, // ✅ Correct prop name
+  onCardLike,
 }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
 
@@ -38,7 +38,7 @@ function Main({
                 item={item}
                 onCardClick={handleCardClick}
                 handleDeleteClick={handleDeleteClick}
-                onCardLike={onCardLike} // ✅ Fixed here
+                onCardLike={onCardLike}
               />
             ))}
         </ul>

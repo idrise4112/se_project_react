@@ -50,7 +50,7 @@
   position: relative;
   box-sizing: border-box;
   border: 1px solid;
-  font-family: "" Cabinet Grotesk ", sans-serif;", sans-serif;
+  font-family: "Cabinet Grotesk", sans-serif;
   font-size: 16px;
   line-height: 20px;
   min-width: 450px;
@@ -60,7 +60,7 @@
 }
 
 .modal__content {
-  font-family: "" Cabinet Grotesk ", sans-serif;", sans-serif;
+  font-family: "Cabinet Grotesk", sans-serif;
   max-width: 496px;
   width: 100%;
   min-height: 436px;
@@ -91,8 +91,8 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  width: 173;
-  height: 108;
+  width: 173px;
+  height: 108px;
 }
 
 .modal__submit-button {
@@ -104,13 +104,13 @@
 }
 
 .add-garment-button {
-  padding: 8px 16px; /* Smaller padding */
-  font-size: 14px; /* Smaller font size */
+  padding: 8px 16px;
+  font-size: 14px;
 }
 
 .modal-container {
-  width: 400px; /* Adjust width */
-  height: auto; /* Auto can adjust based on content */
+  width: 400px;
+  height: auto;
 }
 
 .modal__submit {
@@ -129,6 +129,7 @@
   margin-top: 15px;
   font-weight: 700;
 }
+
 .modal__label_type_radio {
   margin-left: 8px;
   color: rgba(0, 0, 0, 0.5);
@@ -136,9 +137,8 @@
 }
 
 .modal__submit_secondary {
-  background-color: transparent;
-  color: #aaa;
   background-color: grey;
+  color: #aaa;
   border: 1px solid #ddd;
   opacity: 0.6;
   transition: all 0.2s ease;

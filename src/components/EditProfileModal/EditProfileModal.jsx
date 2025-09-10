@@ -18,18 +18,20 @@ const EditProfileModal = ({ isOpen, onClose, currentUser, onUpdate }) => {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      const response = await fetch("/api/user/update", {
+      const token = localStorage.getItem("jwt");
+      const response = await fetch("/users/me", {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({ name, avatar }),
       });
 
       if (!response.ok) throw new Error("Failed to update profile");
 
-      const updatedUser = await response.json();
+      const result = await response.json();
+      const updatedUser = result.data || result;
       onUpdate(updatedUser);
       onClose();
     } catch (err) {
