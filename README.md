@@ -26,12 +26,6 @@ Frontend:
 - RESTful API architecture
 - CORS, Helmet, and centralized error handling
 
-📸 Screenshots
-(Add images or GIFs here showing the homepage, weather card, clothing items, modals, and profile page.)
-
-🎥 Video Demo
-(Optional but powerful—record a walkthrough of your app using Loom or OBS and link it here.)
-
 🧪 Features
 
 - Weather-based clothing suggestions

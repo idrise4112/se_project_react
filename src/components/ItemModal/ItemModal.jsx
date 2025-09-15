@@ -6,11 +6,11 @@ import CurrentUserContext from "../../contexts/CurrentUserContext";
 const ItemModal = ({ activeModal, onClose, card, handleDeleteClick }) => {
   const currentUser = useContext(CurrentUserContext);
   const isOwn = card.owner === currentUser?._id;
+};
 
-  const handleClick = () => {
-    handleDeleteClick(card);
-  };
-
+const handleClick = (e) => {
+  e.stopPropagation();
+  onCardLike(item);
   return (
     <div className={`modal ${activeModal === "preview" ? "modal_opened" : ""}`}>
       <div className="modal__content modal__content_type_image">
