@@ -1,8 +1,14 @@
-// components/EditProfileModal.jsx
-import React, { useState, useEffect } from "react";
 import "./EditProfileModal.css";
+import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import { useState, useEffect } from "react";
 
-const EditProfileModal = ({ isOpen, onClose, currentUser, onUpdate }) => {
+export default function EditProfileModal({
+  isOpen,
+  onClose,
+  currentUser,
+  onUpdate,
+  // EditProfileModalSubmit,
+}) {
   const [name, setName] = useState("");
   const [avatar, setAvatar] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -13,7 +19,6 @@ const EditProfileModal = ({ isOpen, onClose, currentUser, onUpdate }) => {
       setAvatar(currentUser.avatar || "");
     }
   }, [currentUser]);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -42,59 +47,49 @@ const EditProfileModal = ({ isOpen, onClose, currentUser, onUpdate }) => {
     }
   };
 
-  if (!isOpen) return null;
-
   return (
-    <div className="modal-overlay">
-      <div className="modal-content">
-        <h2>Edit Profile</h2>
-        <form className="modal__form" onSubmit={handleSubmit}>
-          <label htmlFor="name" className="modal__label">
-            Name
-            <input
-              id="name"
-              type="text"
-              className="modal__input"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-          </label>
+    <ModalWithForm
+      title="New garment"
+      buttonText="Add garment"
+      isOpen={isOpen}
+      onClose={onClose}
+      onSubmit={handleSubmit}
+    >
+      <label htmlFor="name" className="modal__label">
+        Name
+        <input
+          id="name"
+          type="text"
+          className="modal__input"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
+      </label>
 
-          <label htmlFor="avatar" className="modal__label">
-            Avatar URL
-            <input
-              id="avatar"
-              type="url"
-              className="modal__input"
-              value={avatar}
-              onChange={(e) => setAvatar(e.target.value)}
-              required
-            />
-          </label>
-
-          {avatar && (
-            <img
-              src={avatar}
-              alt="Avatar preview"
-              className="modal__avatar-preview"
-            />
-          )}
-
-          <button
-            type="submit"
-            className="modal__button"
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? "Saving..." : "Save"}
-          </button>
-          <button type="button" className="modal__cancel" onClick={onClose}>
-            Cancel
-          </button>
-        </form>
-      </div>
-    </div>
+      <label htmlFor="avatar" className="modal__label">
+        Avatar URL
+        <input
+          id="avatar"
+          type="url"
+          className="modal__input"
+          value={avatar}
+          onChange={(e) => setAvatar(e.target.value)}
+          required
+        />
+      </label>
+      {/* {avatar && (
+        <img
+          src={avatar}
+          alt="Avatar preview"
+          className="modal__avatar-preview"
+        />
+      )} */}
+      <button
+        type="submit"
+        className="modal__button"
+        disabled={isSubmitting}
+      ></button>
+    </ModalWithForm>
   );
-};
-
-export default EditProfileModal;
+}

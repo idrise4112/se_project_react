@@ -9,7 +9,9 @@ function ItemCard({ item, onCardClick, onCardLike }) {
     onCardClick(item);
   };
 
-  const handleLikeClick = () => {
+  const handleLikeClick = (e) => {
+    console.log(item);
+    e.stopPropagation();
     onCardLike(item);
   };
 
@@ -25,14 +27,13 @@ function ItemCard({ item, onCardClick, onCardLike }) {
         <img className="card__image" src={item.imageUrl} alt={item.name} />
         <div className="card__overlay">
           <h2 className="card__name">{item.name}</h2>
-          {currentUser && (
-            <button
-              className={itemLikeButtonClassName}
-              onClick={handleLikeClick}
-              type="button"
-              aria-label="Like item"
-            />
-          )}
+
+          <button
+            className={itemLikeButtonClassName}
+            onClick={handleLikeClick}
+            type="button"
+            aria-label="Like item"
+          />
         </div>
       </div>
     </li>

@@ -5,21 +5,28 @@ import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 const ItemModal = ({ activeModal, onClose, card, handleDeleteClick }) => {
   const currentUser = useContext(CurrentUserContext);
-  const isOwn = card.owner === currentUser?._id;
-};
+  const isOwn = card?.owner === currentUser?._id;
 
-const handleClick = (e) => {
-  e.stopPropagation();
-  onCardLike(item);
+  const handleDelete = (e) => {
+    e.stopPropagation();
+    handleDeleteClick(card);
+  };
+
+  // Debug log to confirm props
+  console.log("ItemModal props:", { activeModal, card });
+
+  // Prevent rendering if modal isn't active or card is missing
+  if (activeModal !== "preview" || !card) return null;
+
   return (
-    <div className={`modal ${activeModal === "preview" ? "modal_opened" : ""}`}>
+    <div className="modal modal_opened">
       <div className="modal__content modal__content_type_image">
         <button
           onClick={onClose}
           type="button"
           className="modal__close"
           aria-label="Close modal"
-        ></button>
+        />
         <img
           src={card.imageUrl}
           alt={card.name || "Image preview"}
@@ -30,7 +37,7 @@ const handleClick = (e) => {
           <p className="modal__weather">Weather: {card.weather}</p>
           {isOwn && (
             <button
-              onClick={handleClick}
+              onClick={handleDelete}
               type="button"
               className="modal__delete-item"
             >

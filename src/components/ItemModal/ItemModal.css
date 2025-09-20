@@ -1,7 +1,7 @@
-.modal__content_type_image {
+/* .modal__content_type_image {
   padding: 0;
   overflow: hidden;
-}
+} */
 
 .modal__image {
   max-width: 100%;
@@ -43,4 +43,15 @@
   background: none;
   border: none;
   margin-top: -120px;
+}
+
+.modal__content--image {
+  padding: 34px 36px;
+  border: 1px solid;
+  font-size: 16px;
+  line-height: 20px;
+  min-width: 450px;
+  width: 502px;
+  height: 412px;
+  border-radius: 16px; /* overrides parent */
 }

@@ -3,10 +3,10 @@ import "./Profile.css";
 
 import ClothesSection from "../ClothesSection/ClothesSection.jsx";
 import SideBar from "../SideBar/SideBar.jsx";
-import EditProfileModal from "../EditProfileModal/EditProfileModal"; // ✅ Use shared component
+import EditProfileModal from "../EditProfileModal/EditProfileModal";
 
 import CurrentUserContext from "../../contexts/CurrentUserContext";
-import { updateUserProfile } from "../../utils/api"; // ✅ Use centralized API utility
+import { updateUserProfile } from "../../utils/api";
 
 function Profile({
   clothingItems,
@@ -19,6 +19,7 @@ function Profile({
   const [isEditModalOpen, setEditModalOpen] = useState(false);
   const [updatedUser, setUpdatedUser] = useState(currentUser);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSigningOut, setIsSigningOut] = useState(false);
 
   useEffect(() => {
     setUpdatedUser(currentUser);
@@ -42,16 +43,28 @@ function Profile({
     }
   };
 
+  const handleSignOut = async () => {
+    setIsSigningOut(true);
+    try {
+      // Add your sign-out logic here (e.g., clear tokens, redirect)
+      console.log("Signing out...");
+    } catch (err) {
+      console.error("Sign-out failed:", err);
+    } finally {
+      setIsSigningOut(false);
+    }
+  };
+
   return (
     <div className="profile">
       <section className="profile__sidebar">
-        <SideBar />
+        <SideBar onSignOut={handleSignOut} isSigningOut={isSigningOut} />
         <button
           onClick={() => setEditModalOpen(true)}
           className="profile__edit-button"
           disabled={isEditModalOpen}
         >
-          Edit Profile
+          Change profile data
         </button>
       </section>
       <section className="profile__clothing-items">

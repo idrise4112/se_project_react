@@ -2,3 +2,10 @@
   display: flex;
   gap: 126px;
 }
+
+.profile__edit-button {
+  border: none;
+  font-size: 20px;
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-weight: 700;
+}

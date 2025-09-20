@@ -9,7 +9,7 @@ import ItemModal from "../ItemModal/ItemModal";
 import DeleteConfirmationModal from "../DeleteConfirmationModal/DeleteConfirmationModal";
 import Profile from "../Profile/Profile";
 import { filterWeatherData, getWeather } from "../../utils/weatherApi";
-import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext.js";
+import CurrentTemperatureUnitContext from "../../contexts/currentTemperatureUnitContext.js";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
@@ -84,6 +84,11 @@ function App() {
   const handleLoginClick = () => setActiveModal("login");
   const closeActiveModal = () => setActiveModal("");
 
+  const switchModal = (target) => {
+    setActiveModal("");
+    setTimeout(() => setActiveModal(target), 0);
+  };
+
   const handleRegister = async (data) => {
     try {
       await signup(data);
@@ -119,7 +124,7 @@ function App() {
       const token = localStorage.getItem("jwt");
       const newItem = { name, imageUrl, weather };
       const added = await addItem(newItem, token);
-      setClothingItems((prev) => [added, ...prev]);
+      setClothingItems((prev) => [added.data, ...prev]);
       closeActiveModal();
     } catch (error) {
       console.error("Error adding item:", error);
@@ -152,13 +157,10 @@ function App() {
   const handleCardLike = ({ _id, likes }) => {
     const token = localStorage.getItem("jwt");
     const isLiked = likes.some((id) => id === currentUser?._id);
-
     const request = isLiked ? removeCardLike : addCardLike;
 
     request(_id, token)
       .then((response) => {
-        console.log(response);
-
         const updatedCard = response.data;
         setClothingItems((prevItems) =>
           prevItems.map((item) =>
@@ -238,6 +240,7 @@ function App() {
                 isOpen={true}
                 onClose={closeActiveModal}
                 onRegister={handleRegister}
+                switchToLogin={() => switchModal("login")}
               />
             )}
 
@@ -246,6 +249,7 @@ function App() {
                 isOpen={true}
                 onClose={closeActiveModal}
                 onLogin={handleLogin}
+                switchToRegister={() => switchModal("register")}
               />
             )}
 
@@ -256,7 +260,7 @@ function App() {
               onClose={closeActiveModal}
             />
 
-            {activeModal === "preview" && (
+            {activeModal === "preview" && selectedCard && (
               <ItemModal
                 activeModal={activeModal}
                 card={selectedCard}

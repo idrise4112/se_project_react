@@ -9,10 +9,6 @@
 }
 
 .card__name {
-  position: absolute;
-  top: 15px;
-  margin-top: 230px;
-  margin-left: 123px;
   font-family: " Cabinet Grotesk ", sans-serif;
   font-size: 16px;
   font-weight: 700;
@@ -29,13 +25,22 @@
   background-repeat: no-repeat;
   width: 24px;
   height: 24px;
-  margin-top: -318px;
-  position: absolute;
-  margin-left: 227px;
   border: none;
 }
 
 .card__like-button_active {
-  opacity: 1;
-  color: black;
+  background-image: url("../../assets/blackheart.svg");
+}
+
+.card__overlay {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  top: 0px;
+  width: 100%;
+  justify-content: center;
+}
+
+.card__image-container {
+  position: relative;
 }

@@ -11,7 +11,6 @@ function Header({
   onLoginClick,
   onRegisterClick,
   isLoggedIn,
-  onSignOut,
 }) {
   const currentUser = useContext(CurrentUserContext);
   const currentDate = new Date().toLocaleString("default", {
@@ -60,13 +59,6 @@ function Header({
                 <span className="header__username">{currentUser?.name}</span>
               </div>
             </Link>
-            <button
-              className="header__signout-button"
-              onClick={onSignOut}
-              aria-label="Sign Out"
-            >
-              Sign Out
-            </button>
           </div>
         ) : (
           <div className="header__auth-buttons">
