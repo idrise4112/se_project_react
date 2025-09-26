@@ -2,7 +2,13 @@ import "./LoginModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useState } from "react";
 
-export default function LoginModal({ isOpen, onClose, onLogin }) {
+export default function LoginModal({
+  isOpen,
+  onClose,
+  onLogin,
+  switchToRegister,
+  isLoading,
+}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -20,7 +26,7 @@ export default function LoginModal({ isOpen, onClose, onLogin }) {
   return (
     <ModalWithForm
       title="Sign In"
-      buttonText="Log In"
+      buttonText={isLoading ? "Logging in..." : "Log In"}
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
@@ -46,6 +52,16 @@ export default function LoginModal({ isOpen, onClose, onLogin }) {
           required
         />
       </label>
+
+      <p className="modal__redirect">
+        <button
+          type="button"
+          className="modal__redirect-button"
+          onClick={switchToRegister}
+        >
+          or Register
+        </button>
+      </p>
     </ModalWithForm>
   );
 }

@@ -1,29 +1,24 @@
 import "./AddItemModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import { useState, useEffect } from "react";
+import { useForm } from "../../hooks/useForm";
 
 export default function AddItemModal({
   isOpen,
   onClose,
   onAddItemModalSubmit,
+  isLoading,
 }) {
-  const [name, setName] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
-  const [weather, setWeather] = useState("");
-
-  const handleNameChange = (e) => setName(e.target.value);
-  const handleImageUrlChange = (e) => setImageUrl(e.target.value);
-  const handleWeatherChange = (e) => setWeather(e.target.value);
+  const { values, handleChange, setValues } = useForm({
+    name: "",
+    imageUrl: "",
+    weather: "",
+  });
 
   const handleSubmit = (e) => {
-    console.log("submitted");
     e.preventDefault();
-    onAddItemModalSubmit({ name, imageUrl, weather })
+    onAddItemModalSubmit(values)
       .then(() => {
-        // Only reset if submission is successful
-        setName("");
-        setImageUrl("");
-        setWeather("");
+        setValues({ name: "", imageUrl: "", weather: "" });
       })
       .catch((error) => {
         console.error("Submission error:", error);
@@ -33,7 +28,7 @@ export default function AddItemModal({
   return (
     <ModalWithForm
       title="New garment"
-      buttonText="Add garment"
+      buttonText={isLoading ? "Adding..." : "Add garment"}
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
@@ -44,68 +39,47 @@ export default function AddItemModal({
           type="text"
           className="modal__input"
           id="name"
+          name="name"
           placeholder="Name"
           required
           minLength="1"
           maxLength="30"
-          onChange={handleNameChange}
-          value={name}
+          onChange={handleChange}
+          value={values.name}
         />
       </label>
-
       <label htmlFor="imageUrl" className="modal__label">
         Image
         <input
           type="text"
           className="modal__input"
           id="imageUrl"
+          name="imageUrl"
           placeholder="Image URL"
-          onChange={handleImageUrlChange}
-          value={imageUrl}
+          onChange={handleChange}
+          value={values.imageUrl}
         />
       </label>
-
       <fieldset className="modal__radio-buttons">
         <legend className="modal__legend">Select the weather type:</legend>
-
-        <label htmlFor="hot" className="modal__label modal__label_type_radio">
-          <input
-            id="hot"
-            type="radio"
-            className="modal__radio-input"
-            name="weather"
-            value="hot"
-            onChange={handleWeatherChange}
-            checked={weather === "hot"}
-          />
-          Hot
-        </label>
-
-        <label htmlFor="warm" className="modal__label modal__label_type_radio">
-          <input
-            id="warm"
-            type="radio"
-            className="modal__radio-input"
-            name="weather"
-            value="warm"
-            onChange={handleWeatherChange}
-            checked={weather === "warm"}
-          />
-          Warm
-        </label>
-
-        <label htmlFor="cold" className="modal__label modal__label_type_radio">
-          <input
-            id="cold"
-            type="radio"
-            className="modal__radio-input"
-            name="weather"
-            value="cold"
-            onChange={handleWeatherChange}
-            checked={weather === "cold"}
-          />
-          Cold
-        </label>
+        {["hot", "warm", "cold"].map((type) => (
+          <label
+            key={type}
+            htmlFor={type}
+            className="modal__label modal__label_type_radio"
+          >
+            <input
+              id={type}
+              type="radio"
+              className="modal__radio-input"
+              name="weather"
+              value={type}
+              onChange={handleChange}
+              checked={values.weather === type}
+            />
+            {type.charAt(0).toUpperCase() + type.slice(1)}
+          </label>
+        ))}
       </fieldset>
     </ModalWithForm>
   );

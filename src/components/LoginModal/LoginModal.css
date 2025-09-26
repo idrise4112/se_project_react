@@ -1,0 +1,16 @@
+.modal__redirect {
+  width: 496px;
+}
+
+.modal__redirect-button {
+  background: none;
+  border: none;
+  color: #888888;
+  cursor: pointer;
+  font-weight: normal;
+  padding: 0;
+  margin-left: 208px;
+  margin-top: 36px;
+  padding-top: -25px;
+  position: absolute;
+}

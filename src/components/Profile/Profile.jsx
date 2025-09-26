@@ -14,12 +14,13 @@ function Profile({
   onCardClick,
   handleAddClick,
   onCardLike,
+  onSignOut,
+  isSigningOut,
 }) {
   const currentUser = useContext(CurrentUserContext);
   const [isEditModalOpen, setEditModalOpen] = useState(false);
   const [updatedUser, setUpdatedUser] = useState(currentUser);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSigningOut, setIsSigningOut] = useState(false);
 
   useEffect(() => {
     setUpdatedUser(currentUser);
@@ -43,22 +44,10 @@ function Profile({
     }
   };
 
-  const handleSignOut = async () => {
-    setIsSigningOut(true);
-    try {
-      // Add your sign-out logic here (e.g., clear tokens, redirect)
-      console.log("Signing out...");
-    } catch (err) {
-      console.error("Sign-out failed:", err);
-    } finally {
-      setIsSigningOut(false);
-    }
-  };
-
   return (
     <div className="profile">
       <section className="profile__sidebar">
-        <SideBar onSignOut={handleSignOut} isSigningOut={isSigningOut} />
+        <SideBar onSignOut={onSignOut} isSigningOut={isSigningOut} />
         <button
           onClick={() => setEditModalOpen(true)}
           className="profile__edit-button"
@@ -79,7 +68,6 @@ function Profile({
       <EditProfileModal
         isOpen={isEditModalOpen}
         onClose={() => setEditModalOpen(false)}
-        currentUser={updatedUser}
         onUpdate={handleProfileUpdate}
       />
     </div>

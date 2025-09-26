@@ -2,7 +2,13 @@ import "./RegisterModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useState } from "react";
 
-export default function RegisterModal({ isOpen, onClose, onRegister }) {
+export default function RegisterModal({
+  isOpen,
+  onClose,
+  onRegister,
+  switchToLogIn,
+  isLoading, // ✅ Added loading prop
+}) {
   const [name, setName] = useState("");
   const [avatar, setAvatar] = useState("");
   const [email, setEmail] = useState("");
@@ -24,35 +30,11 @@ export default function RegisterModal({ isOpen, onClose, onRegister }) {
   return (
     <ModalWithForm
       title="Sign Up"
-      buttonText="Next"
-      secondaryButtonText="or Log in"
-      onSecondaryClick={onClose}
+      buttonText={isLoading ? "Signing up..." : "Next"}
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
     >
-      <label className="modal__label">
-        Name
-        <input
-          type="text"
-          className="modal__input"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
-      </label>
-
-      <label className="modal__label">
-        Avatar URL
-        <input
-          type="url"
-          className="modal__input"
-          value={avatar}
-          onChange={(e) => setAvatar(e.target.value)}
-          required
-        />
-      </label>
-
       <label className="modal__label">
         Email
         <input
@@ -63,7 +45,6 @@ export default function RegisterModal({ isOpen, onClose, onRegister }) {
           required
         />
       </label>
-
       <label className="modal__label">
         Password
         <input
@@ -74,6 +55,35 @@ export default function RegisterModal({ isOpen, onClose, onRegister }) {
           required
         />
       </label>
+      <label className="modal__label">
+        Name
+        <input
+          type="text"
+          className="modal__input"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
+      </label>
+      <label className="modal__label">
+        Avatar URL
+        <input
+          type="url"
+          className="modal__input"
+          value={avatar}
+          onChange={(e) => setAvatar(e.target.value)}
+          required
+        />
+      </label>
+      <p className="modal__redirect">
+        <button
+          type="button"
+          className="modal__redirect-button"
+          onClick={switchToLogIn}
+        >
+          or LogIn
+        </button>
+      </p>
     </ModalWithForm>
   );
 }

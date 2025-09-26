@@ -12,10 +12,8 @@ const ItemModal = ({ activeModal, onClose, card, handleDeleteClick }) => {
     handleDeleteClick(card);
   };
 
-  // Debug log to confirm props
   console.log("ItemModal props:", { activeModal, card });
 
-  // Prevent rendering if modal isn't active or card is missing
   if (activeModal !== "preview" || !card) return null;
 
   return (

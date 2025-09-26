@@ -49,8 +49,8 @@ export default function EditProfileModal({
 
   return (
     <ModalWithForm
-      title="New garment"
-      buttonText="Add garment"
+      title="Change Profile Data"
+      buttonText="Save Changes"
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
