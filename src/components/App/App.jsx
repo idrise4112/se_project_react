@@ -282,6 +282,29 @@ function App() {
                 isLoading={isLoading}
               />
             )}
+
+            {activeModal === "preview" && (
+              <ItemModal
+                onClose={closeActiveModal}
+                card={selectedCard}
+                activeModal={activeModal}
+                handleDeleteClick={handleDeleteClick}
+              />
+            )}
+            <DeleteConfirmationModal
+              activeModal={activeModal}
+              cardToDelete={cardToDelete}
+              onConfirmDelete={handleConfirmDelete}
+              onClose={closeActiveModal}
+            />
+            {activeModal === "preview" && selectedCard && (
+              <ItemModal
+                activeModal={activeModal}
+                card={selectedCard}
+                onClose={closeActiveModal}
+                handleDeleteClick={handleDeleteClick}
+              />
+            )}
           </div>
         </div>
       </CurrentTemperatureUnitContext.Provider>

@@ -85,11 +85,6 @@ export default function EditProfileModal({
           className="modal__avatar-preview"
         />
       )} */}
-      <button
-        type="submit"
-        className="modal__button"
-        disabled={isSubmitting}
-      ></button>
     </ModalWithForm>
   );
 }
