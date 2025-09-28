@@ -15,6 +15,7 @@ import AddItemModal from "../AddItemModal/AddItemModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import { updateUserProfile } from "../../utils/api";
 import {
   getItems,
   addItem,
@@ -129,6 +130,17 @@ function App() {
     }
   };
 
+  const handleProfileUpdate = async ({ name, avatar }) => {
+    try {
+      const updatedUser = await updateUserProfile({ name, avatar });
+      setCurrentUser(updatedUser);
+      return true; // ✅ signal success
+    } catch (err) {
+      console.error("Profile update failed:", err);
+      alert("Error updating profile");
+      return false;
+    }
+  };
   const handleSignOut = async () => {
     setIsSigningOut(true);
     try {
@@ -246,6 +258,7 @@ function App() {
                       onCardLike={handleCardLike}
                       onSignOut={handleSignOut}
                       isSigningOut={isSigningOut}
+                      onUpdate={handleProfileUpdate}
                     />
                   </ProtectedRoute>
                 }

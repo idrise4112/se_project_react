@@ -1,52 +1,24 @@
 import "./EditProfileModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
-export default function EditProfileModal({
-  isOpen,
-  onClose,
-  currentUser,
-  onUpdate,
-  // EditProfileModalSubmit,
-}) {
+export default function EditProfileModal({ isOpen, onClose, onUpdate }) {
   const [name, setName] = useState("");
   const [avatar, setAvatar] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const currentUser = useContext(CurrentUserContext);
 
   useEffect(() => {
-    if (currentUser) {
+    if (isOpen && currentUser) {
       setName(currentUser.name || "");
       setAvatar(currentUser.avatar || "");
     }
-  }, [currentUser]);
+  }, [isOpen, currentUser]);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    try {
-      const token = localStorage.getItem("jwt");
-      const response = await fetch("/users/me", {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ name, avatar }),
-      });
-
-      if (!response.ok) throw new Error("Failed to update profile");
-
-      const result = await response.json();
-      const updatedUser = result.data || result;
-      onUpdate(updatedUser);
-      onClose();
-    } catch (err) {
-      console.error(err);
-      alert("Error updating profile");
-    } finally {
-      setIsSubmitting(false);
-    }
+    const success = await onUpdate({ name, avatar });
+    if (success) onClose();
   };
-
   return (
     <ModalWithForm
       title="Change Profile Data"
@@ -66,7 +38,6 @@ export default function EditProfileModal({
           required
         />
       </label>
-
       <label htmlFor="avatar" className="modal__label">
         Avatar URL
         <input
@@ -78,6 +49,7 @@ export default function EditProfileModal({
           required
         />
       </label>
+      {/* Optional avatar preview */}
       {/* {avatar && (
         <img
           src={avatar}

@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import "./Profile.css";
 
 import ClothesSection from "../ClothesSection/ClothesSection.jsx";
@@ -6,7 +6,6 @@ import SideBar from "../SideBar/SideBar.jsx";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
 
 import CurrentUserContext from "../../contexts/CurrentUserContext";
-import { updateUserProfile } from "../../utils/api";
 
 function Profile({
   clothingItems,
@@ -16,38 +15,19 @@ function Profile({
   onCardLike,
   onSignOut,
   isSigningOut,
+  onUpdate,
 }) {
   const currentUser = useContext(CurrentUserContext);
   const [isEditModalOpen, setEditModalOpen] = useState(false);
-  const [updatedUser, setUpdatedUser] = useState(currentUser);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  useEffect(() => {
-    setUpdatedUser(currentUser);
-  }, [currentUser]);
 
   const userItems = clothingItems.filter(
-    (item) => item.owner === updatedUser?._id
+    (item) => item.owner === currentUser?._id
   );
-
-  const handleProfileUpdate = async ({ name, avatar }) => {
-    setIsSubmitting(true);
-    try {
-      const newUserData = await updateUserProfile({ name, avatar });
-      setUpdatedUser(newUserData);
-      setEditModalOpen(false);
-    } catch (err) {
-      console.error(err);
-      alert("Error updating profile");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
 
   return (
     <div className="profile">
       <section className="profile__sidebar">
-        <SideBar onSignOut={onSignOut} isSigningOut={isSigningOut} />
+        <SideBar />
         <button
           onClick={() => setEditModalOpen(true)}
           className="profile__edit-button"
@@ -55,7 +35,17 @@ function Profile({
         >
           Change profile data
         </button>
+        <button
+          type="button"
+          className="profile__logout-button"
+          onClick={onSignOut}
+          disabled={isSigningOut}
+          aria-label="Log Out"
+        >
+          {isSigningOut ? "Logging Out..." : "Log Out"}
+        </button>
       </section>
+
       <section className="profile__clothing-items">
         <ClothesSection
           onCardClick={onCardClick}
@@ -65,10 +55,11 @@ function Profile({
           onCardLike={onCardLike}
         />
       </section>
+
       <EditProfileModal
         isOpen={isEditModalOpen}
         onClose={() => setEditModalOpen(false)}
-        onUpdate={handleProfileUpdate}
+        onUpdate={onUpdate}
       />
     </div>
   );

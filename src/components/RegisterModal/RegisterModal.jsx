@@ -30,7 +30,7 @@ export default function RegisterModal({
   return (
     <ModalWithForm
       title="Sign Up"
-      buttonText={isLoading ? "Signing up..." : "Next"}
+      buttonText={isLoading ? "Signing up..." : "Sign Up"}
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}

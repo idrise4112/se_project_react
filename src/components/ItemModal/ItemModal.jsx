@@ -12,8 +12,6 @@ const ItemModal = ({ activeModal, onClose, card, handleDeleteClick }) => {
     handleDeleteClick(card);
   };
 
-  console.log("ItemModal props:", { activeModal, card });
-
   if (activeModal !== "preview" || !card) return null;
 
   return (

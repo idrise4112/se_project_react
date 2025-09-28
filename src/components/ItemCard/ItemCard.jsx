@@ -10,7 +10,6 @@ function ItemCard({ item, onCardClick, onCardLike }) {
   };
 
   const handleLikeClick = (e) => {
-    console.log(item);
     e.stopPropagation();
     onCardLike(item);
   };
@@ -28,12 +27,14 @@ function ItemCard({ item, onCardClick, onCardLike }) {
         <div className="card__overlay">
           <h2 className="card__name">{item.name}</h2>
 
-          <button
-            className={itemLikeButtonClassName}
-            onClick={handleLikeClick}
-            type="button"
-            aria-label="Like item"
-          />
+          {currentUser && (
+            <button
+              className={itemLikeButtonClassName}
+              onClick={handleLikeClick}
+              type="button"
+              aria-label="Like item"
+            />
+          )}
         </div>
       </div>
     </li>

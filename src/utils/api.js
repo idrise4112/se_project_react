@@ -1,4 +1,4 @@
-import { BASE_URL } from "./auth";
+import { BASE_URL } from "../utils/auth.js"; // ✅ fixed relative path
 
 // Centralized response handler
 export const checkResponse = (res) => {
@@ -19,7 +19,7 @@ export function getItems() {
   }).then(checkResponse);
 }
 
-// 2. Add a new item
+// 2.Add a new item
 export const addItem = async (newItem, token) => {
   return fetch(`${BASE_URL}/items/`, {
     method: "POST",
@@ -31,13 +31,13 @@ export const addItem = async (newItem, token) => {
   }).then(checkResponse);
 };
 
-// 3. Delete an item
+// 3.Delete an item
 export const deleteItem = (id, token) => {
   return fetch(`${BASE_URL}/items/${id}`, {
     method: "DELETE",
     headers: {
-      Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
   }).then(checkResponse);
 };
@@ -67,7 +67,7 @@ export const removeCardLike = (id, token) => {
 // 6. Update user profile
 export const updateUserProfile = async ({ name, avatar }) => {
   const token = localStorage.getItem("jwt");
-  return fetch(`${BASE_URL}/items/${id}/users/me`, {
+  return fetch(`${BASE_URL}/users/me`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
