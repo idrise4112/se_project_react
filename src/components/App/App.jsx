@@ -134,7 +134,7 @@ function App() {
     try {
       const updatedUser = await updateUserProfile({ name, avatar });
       setCurrentUser(updatedUser);
-      return true; // ✅ signal success
+      return true; //
     } catch (err) {
       console.error("Profile update failed:", err);
       alert("Error updating profile");
