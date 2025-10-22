@@ -1,5 +1,4 @@
-export const BASE_URL = "http://localhost:3001";
-
+import { BASE_URL } from "../utils/constants.js";
 export function signup({ email, password, name, avatar }) {
   return fetch(`${BASE_URL}/signup`, {
     method: "POST",

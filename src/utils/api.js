@@ -1,4 +1,4 @@
-import { BASE_URL } from "../utils/auth.js"; // ✅ fixed relative path
+import { BASE_URL } from "../utils/constants.js";
 
 // Centralized response handler
 export const checkResponse = (res) => {
