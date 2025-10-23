@@ -94,6 +94,7 @@
   flex-direction: column;
   width: 173px;
   height: 108px;
+  z-index: 10;
 }
 
 .modal__submit-button {
